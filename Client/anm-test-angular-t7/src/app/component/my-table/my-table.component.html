@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="d-flex">
+    <div class="col-md-12" style="padding-right: unset;padding-left: unset;">
+      <div class="table-responsive">
+        <table id="mytable" class="table table-bordred table-striped" style="overflow: hidden;">
+          <thead>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Age</th>
+            <!-- <th>DOB</th> -->
+            <th>Gender</th>
+            <th>Balance</th>
+            <th>Account Number</th>
+            <th style="min-width: 90px;">Action</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data">
+              <td>{{item.name}}</td>
+              <td>{{item.email}}</td>
+              <td>{{item.address}}</td>
+              <td>{{item.age}}</td>
+              <!-- <td>{{item.dob| date: 'dd/MM/yyyy'}}</td> -->
+              <td>{{item.gender === 0 ? 'Female': 'Male'}}</td>
+              <td>{{item.balance}}</td>
+              <td>{{item.account_number}}</td>
+              <td>
+                <div class="row" style="flex-wrap: unset;">
+                  <button title="View Detail" class="btn btn-primary btn-xs icon" data-title="View" data-toggle="modal"
+                    (click)="openDialogAddOrUpdate(item, 'view')" data-target="#view"><i class="fa fa-eye"></i></button>
+                  <button title="Edit" class="btn btn-info btn-xs icon" data-title="Edit" data-toggle="modal"
+                    (click)="openDialogAddOrUpdate(item, 'edit')" data-target="#edit"><i
+                      class="fa fa-pencil-square-o"></i>
+                  </button>
+                  <button title="Delete" class="btn btn-danger btn-xs icon" data-title="Delete" data-toggle="modal"
+                    (click)="showDialogConfirm(item._id)" data-target="#delete"><i class="fa fa-times-circle"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="clearfix"></div>
+        <ul class="pagination pull-right">
+          <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+          <li class="active"><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+        </ul>
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="container" class="content-dialog">
+    <i (click)="closeDialog()" title="close" class="fa fa-times icon-close" aria-hidden="true"></i>
+    <div class="title">
+        <h1 style="margin: 0;">
+            <b>{{action === 'view'? 'View Detail Account': action === 'add'? 'Add New Account':'Update Information Account'}}</b>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="form-group col-6">
+            <label for="formGroupExampleInput">Name</label>
+            <input type="text" class="form-control" id="formGroupExampleInput1" placeholder="Name"
+                [attr.disabled]="!isView ? null : ''" [(ngModel)]="account.name">
+        </div>
+        <div class="form-group col-6">
+            <label for="formGroupExampleInput2">Email</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Email"
+                [attr.disabled]="!isView ? null : ''" [(ngModel)]="account.email">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-6">
+            <label for="formGroupExampleInput2">Address</label>
+            <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Address"
+                [attr.disabled]="!isView ? null : ''" [(ngModel)]="account.address">
+        </div>
+        <div class="form-group col-6">
+            <label for="formGroupExampleInput2">Age</label>
+            <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="Age"
+                [attr.disabled]="!isView ? null : ''" [(ngModel)]="account.age">
+        </div>
+    </div>
+    <div class="row">
+        <!-- <div class="form-group col-6">
+            <label for="formGroupExampleInput2">Date of birth</label>
+            <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="Date of birth"
+                [attr.disabled]="!isView ? null : ''" [(ngModel)]="account.dob">
+        </div> -->
+        <div class="form-group col-6">
+            <label for="formGroupExampleInput2">Gender</label>
+            <select class="custom-select" [attr.disabled]="!isView ? null : ''" [(ngModel)]="account.gender">
+                <option value="1">Male</option>
+                <option value="0">Female</option>
+            </select>
+        </div>
+        <div class="form-group col-6">
+            <label for="formGroupExampleInput2">Balance</label>
+            <input type="text" class="form-control" id="formGroupExampleInput5" placeholder="Balance"
+                [attr.disabled]="!isView ? null : ''" [(ngModel)]="account.balance">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-6">
+            <label for="formGroupExampleInput2">Account Number</label>
+            <input type="text" class="form-control" id="formGroupExampleInput7" placeholder="Account Number"
+                [attr.disabled]="!isView ? null : ''" [(ngModel)]="account.account_number">
+        </div>
+    </div>
+    <div style="margin-top: 20px;">
+        <button *ngIf="action==='add'" type="button" class="btn btn-success" (click)="addAccount()">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+            Add new
+        </button>
+        <button *ngIf="action==='edit'" type="button" class="btn btn-primary" (click)="updateAccount()">
+            <i class="fa fa-pencil-square-o"></i>
+            Update
+        </button>
+    </div>
+</div>

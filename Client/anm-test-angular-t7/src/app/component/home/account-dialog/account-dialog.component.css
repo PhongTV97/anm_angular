@@ -1,0 +1,18 @@
+.content-dialog{
+    width: 700px; 
+    padding: 20px;
+    position: relative;
+}
+
+.icon-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+.title{
+    padding: 10px;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 20px;
+}

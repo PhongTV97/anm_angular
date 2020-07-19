@@ -1,19 +1,20 @@
-import { constants } from './../helpers/constant';
 import { getAccounts, getAccountByEmail, removeAccounts, getAccountByAccNo, addAccount, editAccount, getAccountById } from './../service/accounts.service';
 import { message } from './../helpers/constant';
 import mongoose from 'mongoose';
-import { isNumber, validateRegex } from './../helpers/utils';
+import { isNumber, validateRegex, getPaginationItems } from './../helpers/utils';
 
 export const searchController = async (req, res) => {
     try {
-        let page = req.query.page || constants.DEFAULT_PAGE
-        let limit = req.query.limit || constants.DEFAULT_LIMIT
-        // let query = req.body.query;
-        let query = {}
-        const lstAccounts = await getAccounts(query, limit, page);
+        const { query } = req
+        const pagination = getPaginationItems(query.page, query.limit)
+        delete req.query.page;
+        delete req.query.limit;
+        const data = await getAccounts(query, pagination.limit, pagination.skip);
         return res.json({
             result: true,
-            lstAccounts
+            lstAccounts: data.accounts,
+            page: query.page || 1,
+            total: data.total
         })
     } catch (error) {
         console.log(error)
@@ -48,14 +49,13 @@ export const removeController = async (req, res) => {
 export const addController = async (req, res) => {
     try {
         const id = req.params.id;
-        const name = req.body.account_number;
-        const email = req.body.email;
-        const address = req.body.account_number;
-        const age = req.body.account_number;
-        const gender = req.body.account_number;
-        const balance = req.body.account_number;
-        const account_number = req.body.account_number;
-
+        const name = req.body.name.trim();
+        const email = req.body.email.trim();
+        const address = req.body.address.trim();
+        const age = req.body.age;
+        const gender = req.body.gender;
+        const balance = req.body.balance;
+        const account_number = req.body.account_number.trim();
         if (!email) {
             return res.json({ result: false, message: message.MSG0013 })
         }
@@ -69,7 +69,6 @@ export const addController = async (req, res) => {
                 return res.json({ result: false, message: message.MSG0019 })
             }
         }
-
         const accByEmail = await getAccountByEmail({ email });
         const accByAccNo = await getAccountByAccNo({ account_number });
         if (accByEmail) {
@@ -132,14 +131,13 @@ export const addController = async (req, res) => {
 export const editController = async (req, res) => {
     try {
         const id = req.params.id;
-        const name = req.body.account_number;
-        const email = req.body.email;
-        const address = req.body.account_number;
-        const age = req.body.account_number;
-        const gender = req.body.account_number;
-        const balance = req.body.account_number;
-        const account_number = req.body.account_number;
-
+        const name = req.body.name.trim();
+        const email = req.body.email.trim();
+        const address = req.body.address.trim();
+        const age = req.body.age;
+        const gender = req.body.gender;
+        const balance = req.body.balance;
+        const account_number = req.body.account_number.trim();
         if (!id) {
             return res.json({ result: false, message: message.MSG0014 })
         }

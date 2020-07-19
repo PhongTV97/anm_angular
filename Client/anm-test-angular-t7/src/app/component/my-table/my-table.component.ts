@@ -9,13 +9,21 @@ import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.compone
   styleUrls: ['./my-table.component.css']
 })
 export class MyTableComponent implements OnInit {
-  @Input() data;
+  @Input() rows: any;
+  @Input() user: any;
+  @Input() columns: any;
+  @Input() totals: number;
+  @Input() page: number;
+  @Input() pageSize: number;
+
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
   openDialogAddOrUpdate(item, action) {
+    console.log(item);
+
     const dialogRef = this.dialog.open(AccountDialogComponent, { data: { item, action } });
   }
 

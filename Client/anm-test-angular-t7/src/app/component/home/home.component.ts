@@ -11,11 +11,52 @@ import { AccountDialogComponent } from './account-dialog/account-dialog.componen
 })
 export class HomeComponent implements OnInit {
   lstAccounts: Account[] = [];
-  constructor(private apiService: ActionService, public dialog: MatDialog) { }
+  accCurrent: Account;
+  fields: any[];
+  page = 1;
+  totals = 100;
+  pageSize = 50;
+  constructor(private apiService: ActionService, public dialog: MatDialog) {
+    this.accCurrent = new Account()
+    this.fields = [
+      {
+        label: 'Name',
+        field: 'name',
+      },
+      {
+        label: 'Email',
+        field: 'email'
+      },
+      {
+        label: 'Address',
+        field: 'address'
+      },
+      {
+        label: 'Age',
+        field: 'age'
+      },
+      {
+        label: 'Gender',
+        field: 'gender'
+      },
+      {
+        label: 'Balance',
+        field: 'balance'
+      },
+      {
+        label: 'Account No',
+        field: 'account_number'
+      }
+    ];
+  }
 
   ngOnInit() {
+    let data = JSON.parse(localStorage.getItem('cur_user'));
+    this.accCurrent = data.user;
     this.apiService.getData().subscribe(res => {
       this.lstAccounts = res.lstAccounts;
+      this.page = res.page;
+      this.totals = res.total;
     })
   }
 

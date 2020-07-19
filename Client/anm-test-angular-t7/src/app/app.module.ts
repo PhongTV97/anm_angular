@@ -15,6 +15,8 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
 import { DialogConfirmComponent } from './component/dialog-confirm/dialog-confirm.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarsComponent } from './component/navbars/navbars.component';
+import { ToastNotificationsModule } from "ngx-toast-notifications";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { NavbarsComponent } from './component/navbars/navbars.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastNotificationsModule,
+    NgbModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

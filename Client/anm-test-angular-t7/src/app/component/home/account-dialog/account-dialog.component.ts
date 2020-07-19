@@ -4,6 +4,7 @@ import { Account } from 'src/app/models/Accounts';
 import { ActionService } from 'src/app/service/action.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Constant } from 'src/app/common/constant';
+import { Toaster, ToastType } from "ngx-toast-notifications";
 
 @Component({
   selector: 'app-account-dialog',
@@ -21,14 +22,14 @@ export class AccountDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<AccountDialogComponent>,
     private actionService: ActionService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toaster: Toaster
   ) {
     this.account = new Account();
   }
 
   ngOnInit() {
     this.action = this.data.action
-    console.log(this.action);
     if (this.action === 'edit' || this.action === 'view') {
       if (this.action === 'view') {
         this.isView = true
@@ -57,55 +58,45 @@ export class AccountDialogComponent implements OnInit {
     this.submitted = true;
     if (this.f.name.errors) {
       if (this.f.name.errors.required) {
-        console.log('require name');
         return false;
       }
     }
     if (this.f.email.errors) {
       if (this.f.email.errors.required) {
-        console.log('require email');
         return false;
       }
       if (this.f.email.errors.pattern) {
-        console.log('pattern email');
         return false;
       }
     }
     if (this.f.address.errors) {
       if (this.f.address.errors.required) {
-        console.log('address');
         return false;
       }
     }
     if (this.f.age.errors) {
       if (this.f.age.errors.required) {
-        console.log('requie age');
 
         return false;
       }
       if (this.f.age.errors.pattern) {
-        console.log('pattern age');
         return false;
       }
     }
     if (this.f.balance.errors) {
       if (this.f.balance.errors.required) {
-        console.log('balance');
         return false;
       }
       if (this.f.balance.errors.pattern) {
-        console.log('pattern');
         return false;
       }
     }
 
     if (this.f.account_number.errors) {
       if (this.f.account_number.errors.required) {
-        console.log('require account_number');
         return false;
       }
       if (this.f.account_number.errors.pattern) {
-        console.log('partter account_number');
         return false;
       }
     }
@@ -114,12 +105,13 @@ export class AccountDialogComponent implements OnInit {
 
   getValueToForm() {
     return {
+      _id: this.account._id,
       name: this.accountForm.get('name').value,
       email: this.accountForm.get('email').value,
       address: this.accountForm.get('address').value,
-      age: this.accountForm.get('age').value,
-      gender: this.accountForm.get('gender').value,
-      balance: this.accountForm.get('balance').value,
+      age: Number(this.accountForm.get('age').value),
+      gender: Number(this.accountForm.get('gender').value),
+      balance: Number(this.accountForm.get('balance').value),
       account_number: this.accountForm.get('account_number').value,
     };
   }
@@ -130,22 +122,35 @@ export class AccountDialogComponent implements OnInit {
 
   updateAccount() {
     const checkValidate = this.checkSubmitted()
-    console.log(this.accountForm);
-
+    console.log(this.getValueToForm());
     if (checkValidate) {
-      this.actionService.update(this.account).subscribe(data => {
-        console.log(data);
+      this.actionService.update(this.getValueToForm()).subscribe(data => {
+        this.closeDialog();
+        this.showToast(data);
       })
     }
   }
 
+  showToast(data) {
+    let types: Array<ToastType> = ['success', 'danger'];
+    let type = types[0];
+    let texts = data.message
+    if (!data.result) {
+      type = types[1];
+    }
+    this.toaster.open({
+      text: texts,
+      caption: type + ' notification',
+      type: type
+    });
+  }
+
   addAccount() {
     const checkValidate = this.checkSubmitted()
-    console.log(this.f);
-
     if (checkValidate) {
-      this.actionService.add(this.account).subscribe(data => {
-        console.log(data);
+      this.actionService.add(this.getValueToForm()).subscribe(data => {
+        this.closeDialog();
+        this.showToast(data);
       })
     }
   }

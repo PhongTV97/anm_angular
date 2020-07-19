@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { ActionService } from 'src/app/service/action.service';
+import { Toaster, ToastType } from "ngx-toast-notifications";
 
 @Component({
   selector: 'app-dialog-confirm',
@@ -12,10 +13,25 @@ export class DialogConfirmComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<DialogConfirmComponent>,
-    private actionService: ActionService
+    private actionService: ActionService,
+    private toaster: Toaster
   ) { }
 
   ngOnInit() {
+  }
+
+  showToast(data) {
+    let types: Array<ToastType> = ['success', 'danger'];
+    let type = types[0];
+    let texts = data.message
+    if (!data.result) {
+      type = types[1];
+    }
+    this.toaster.open({
+      text: texts,
+      caption: type + ' notification',
+      type: type
+    });
   }
 
   closeDialogConfirm() {
@@ -25,7 +41,7 @@ export class DialogConfirmComponent implements OnInit {
   removeItem() {
     this.actionService.remove(this.data.id).subscribe(res => {
       this.closeDialogConfirm();
+      this.showToast(res);
     })
   }
-
 }

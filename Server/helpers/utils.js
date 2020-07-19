@@ -1,5 +1,8 @@
+import { constants } from './../helpers/constant';
+
+
 export function isNumber(str) {
-    return !isNaN(Number(this.clearComma(str)))
+    return !isNaN(Number(clearComma(str)))
 }
 
 export function validateEmail(email) {
@@ -16,3 +19,18 @@ export function clearComma(str) {
 export function validateRegex(regex, str) {
     return regex.test(str)
 }
+
+export function getPaginationItems(page, limit) {
+    page = parseInt(page);
+    limit = parseInt(limit);
+    if (!page) {
+        page = constants.DEFAULT_PAGE
+    }
+    if (!limit) {
+        limit = constants.DEFAULT_LIMIT
+    }
+    return {
+        skip: (page - 1) * limit,
+        limit
+    };
+};

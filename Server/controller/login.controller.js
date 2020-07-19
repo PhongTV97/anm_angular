@@ -5,8 +5,8 @@ import jwt from 'jsonwebtoken';
 
 export const loginController = async (req, res) => {
     try {
-        let user_name = req.body.user_name
-        let password = req.body.password
+        let user_name = req.body.user_name.trim();
+        let password = req.body.password.trim()
         if (!user_name) {
             return res.json({ result: false, message: message.MSG0011, status: 1 })
         }

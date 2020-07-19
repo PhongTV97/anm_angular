@@ -1,4 +1,5 @@
 export class Account {
+    _id: string;
     name: string;
     email: string;
     address: string;
@@ -15,7 +16,7 @@ export class Account {
         this.address = '';
         this.age = 0;
         this.dob = new Date();
-        this.gender = '0';
+        this.gender = '1';
         this.balance = 0;
         this.account_number = '';
         this.phone_number = '';

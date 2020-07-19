@@ -45,12 +45,14 @@
             aria-hidden="true"></i> Clear</button>
       </div>
       <div>
-        <button type="button" class="btn btn-success" (click)="openFormDialog()"><i class="fa fa-plus-circle"
-            aria-hidden="true"></i>
+        <button type="button" class="btn btn-success" (click)="openFormDialog()"
+          [attr.disabled]="accCurrent.role === 0 ? '' : null"><i class="fa fa-plus-circle" aria-hidden="true"></i>
           Add
           new</button>
       </div>
     </div>
   </div>
 </div>
-<app-my-table [data]="lstAccounts"></app-my-table>
+<app-my-table [rows]="lstAccounts" [columns]="fields" [totals]="totals" [user]="accCurrent" [page]="page"
+  [pageSize]="pageSize">
+</app-my-table>

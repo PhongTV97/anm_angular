@@ -23,9 +23,8 @@ export class LoginComponent implements OnInit {
       this.hasError = true
     } else {
       this.apiService.login({ user_name: this.username, password: this.password }).subscribe(res => {
-        console.log(res);
         if (res.result) {
-          localStorage.setItem('token', res.token);
+          localStorage.setItem('cur_user', JSON.stringify(res));
           this.router.navigate(['home'])
         } else {
           this.hasError = true

@@ -7,17 +7,18 @@ import { Router } from '@angular/router';
 export class JwtInterceptor implements HttpInterceptor {
     constructor(private router: Router) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const currentToken = localStorage.getItem('token');
-        if (currentToken !== null || request.url.indexOf('login') !== -1) {
+        const curUser = JSON.parse(localStorage.getItem('cur_user'));
+        if (curUser) {
             request = request.clone({
                 setHeaders: {
-                    token: currentToken,
+                    token: curUser.token
                 }
             });
             return next.handle(request);
-        }
-        else {
-            this.router.navigateByUrl('Error');
+        } else if (request.url.indexOf('login') !== -1) {
+            return next.handle(request);
+        } else {
+            this.router.navigateByUrl('/error');
             return Observable.create(empty);
         }
     }

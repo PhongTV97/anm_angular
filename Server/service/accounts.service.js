@@ -48,7 +48,7 @@ export const removeAccounts = async (id) => {
     return true;
 }
 
-export const getAccountByIs = async (query) => {
+export const getAccountById = async (query) => {
     const acc = await Accounts.findOne(query);
     if (!acc) {
         return false

@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccountDialogComponent } from './component/home/account-dialog/account-dialog.component';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogConfirmComponent } from './component/dialog-confirm/dialog-confirm.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NavbarsComponent } from './component/navbars/navbars.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { DialogConfirmComponent } from './component/dialog-confirm/dialog-confir
     HomeComponent,
     MyTableComponent,
     AccountDialogComponent,
-    DialogConfirmComponent
+    DialogConfirmComponent,
+    NavbarsComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { DialogConfirmComponent } from './component/dialog-confirm/dialog-confir
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

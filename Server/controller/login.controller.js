@@ -7,6 +7,12 @@ export const loginController = async (req, res) => {
     try {
         let user_name = req.body.user_name
         let password = req.body.password
+        if (!user_name) {
+            return res.json({ result: false, message: message.MSG0011, status: 1 })
+        }
+        if (!password) {
+            return res.json({ result: false, message: message.MSG0012, status: 1 })
+        }
         const user = await getUser({ user_name: user_name, password: md5(password) })
         if (!user) {
             return res.json({

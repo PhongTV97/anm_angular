@@ -19,8 +19,8 @@ export class ActionService {
     return this.http.post<any>(apiUrl + '/login', data, httpOptions);
   }
 
-  getData(): Observable<any> {
-    return this.http.get<any>(apiUrl + '/accounts', httpOptions);
+  getData(query): Observable<any> {
+    return this.http.get<any>(apiUrl + '/accounts', { ...httpOptions, params: query });
   }
 
   remove(id): Observable<any> {

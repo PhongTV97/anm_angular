@@ -21,14 +21,14 @@ export function validateRegex(regex, str) {
 }
 
 export function getPaginationItems(page, limit) {
-    page = parseInt(page);
-    limit = parseInt(limit);
     if (!page) {
         page = constants.DEFAULT_PAGE
     }
     if (!limit) {
         limit = constants.DEFAULT_LIMIT
     }
+    page = parseInt(page);
+    limit = parseInt(limit);
     return {
         skip: (page - 1) * limit,
         limit

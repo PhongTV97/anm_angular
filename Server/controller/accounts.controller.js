@@ -6,15 +6,16 @@ import { isNumber, validateRegex, getPaginationItems } from './../helpers/utils'
 export const searchController = async (req, res) => {
     try {
         const { query } = req
+        console.log('query', query);
         const pagination = getPaginationItems(query.page, query.limit)
         delete req.query.page;
         delete req.query.limit;
         const data = await getAccounts(query, pagination.limit, pagination.skip);
         return res.json({
             result: true,
-            lstAccounts: data.accounts,
+            lstAccounts: data.accounts || [],
             page: query.page || 1,
-            total: data.total
+            total: data.total || 0
         })
     } catch (error) {
         console.log(error)
@@ -48,7 +49,6 @@ export const removeController = async (req, res) => {
 
 export const addController = async (req, res) => {
     try {
-        const id = req.params.id;
         const name = req.body.name.trim();
         const email = req.body.email.trim();
         const address = req.body.address.trim();

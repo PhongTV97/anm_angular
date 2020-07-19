@@ -125,7 +125,7 @@ export class AccountDialogComponent implements OnInit {
     console.log(this.getValueToForm());
     if (checkValidate) {
       this.actionService.update(this.getValueToForm()).subscribe(data => {
-        this.closeDialog();
+        // this.closeDialog();
         this.showToast(data);
       })
     }
@@ -149,7 +149,7 @@ export class AccountDialogComponent implements OnInit {
     const checkValidate = this.checkSubmitted()
     if (checkValidate) {
       this.actionService.add(this.getValueToForm()).subscribe(data => {
-        this.closeDialog();
+        // this.closeDialog();
         this.showToast(data);
       })
     }

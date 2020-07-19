@@ -3,9 +3,9 @@
     height: 50px;
     border-radius: 50%;
     margin-right: 15px;
+    overflow: hidden;
 }
 
 .avatar img {
     width: 100%;
-    border-radius: 50%;
 }

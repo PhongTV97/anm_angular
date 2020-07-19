@@ -7,11 +7,13 @@ import Accounts from './../models/accounts';
 // }
 
 export const getAccounts = async (query, limit, skip) => {
-    const gender = query.gender || null
     const name = new RegExp(query.name, 'i')
-    const account_number = new RegExp(query.account_number, 'i')
     const email = new RegExp(query.email, 'i')
     const address = new RegExp(query.address, 'i')
+    //age
+    const gender = query.gender || null
+    //balance
+    const account_number = new RegExp(query.account_number, 'i')
 
     const col = query.col || null
     const sort = query.sort || null

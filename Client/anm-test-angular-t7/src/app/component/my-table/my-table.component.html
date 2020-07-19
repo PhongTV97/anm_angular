@@ -9,7 +9,9 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of rows">
-              <td *ngFor="let ele of columns">{{item[ele.field]}}</td>
+              <td *ngFor="let ele of columns">
+                {{ ele.field !== 'gender' ? (ele.field === 'balance' ? formatBalance(item[ele.field]) : item[ele.field]) : (item[ele.field] === 0 ? 'Female' : 'Male')}}
+              </td>
               <td>
                 <div class="row" style="flex-wrap: unset;">
                   <button title="View Detail" class="btn btn-primary btn-xs icon" data-title="View" data-toggle="modal"
@@ -29,7 +31,7 @@
         </table>
         <div class="clearfix"></div>
         <ngb-pagination class="d-flex justify-content-end" [collectionSize]="totals" [(page)]="page" [maxSize]="5"
-          [pageSize]="pageSize" [rotate]="true" [boundaryLinks]="true" (pageChange)="changePage($event)">
+          [pageSize]="pageSize" [rotate]="true" [boundaryLinks]="true" (pageChange)="changePageNumber($event)">
         </ngb-pagination>
       </div>
     </div>

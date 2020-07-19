@@ -5,7 +5,7 @@
             <b>{{action === 'view'? 'View Detail Account': action === 'add'? 'Add New Account':'Update Information Account'}}</b>
         </h1>
     </div>
-    <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="accountForm">
         <div class="row">
             <div class="form-group col-6">
                 <label for="formGroupExampleInput">Name</label>

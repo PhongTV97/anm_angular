@@ -6,7 +6,6 @@ import { isNumber, validateRegex, getPaginationItems } from './../helpers/utils'
 export const searchController = async (req, res) => {
     try {
         const { query } = req
-        console.log('query', query);
         const pagination = getPaginationItems(query.page, query.limit)
         delete req.query.page;
         delete req.query.limit;
@@ -90,7 +89,7 @@ export const addController = async (req, res) => {
                 return res.json({ result: false, message: message.MSG0018 })
             }
         }
-        if (!gender) {
+        if (gender === undefined || gender === null) {
             return res.json({ result: false, message: message.MSG0022 })
         } else {
             if (!isNumber(gender)) {
@@ -145,8 +144,8 @@ export const editController = async (req, res) => {
         if (!accByIds) {
             return res.json({ result: false, message: message.MSG0021 });
         }
-        const accByEmail = await getAccountByEmail({ email, _id: { $ne: req.body._id } });
-        const accByAccNo = await getAccountByAccNo({ account_number, _id: { $ne: req.body._id } });
+        const accByEmail = await getAccountByEmail({ email, _id: { $ne: id } });
+        const accByAccNo = await getAccountByAccNo({ account_number, _id: { $ne: id } });
         if (accByEmail) {
             return res.json({ result: false, message: message.MSG005 });
         }
@@ -166,7 +165,7 @@ export const editController = async (req, res) => {
                 return res.json({ result: false, message: message.MSG0018 })
             }
         }
-        if (!gender) {
+        if (gender === undefined || gender === null) {
             return res.json({ result: false, message: message.MSG0022 })
         } else {
             if (!isNumber(gender)) {

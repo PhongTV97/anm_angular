@@ -11,7 +11,7 @@ export class CanActivateGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const curUser = JSON.parse(localStorage.getItem('cur_user'));
-    if (!curUser.token) {
+    if (!curUser) {
       this.router.navigate(['login']);
     }
     return true;

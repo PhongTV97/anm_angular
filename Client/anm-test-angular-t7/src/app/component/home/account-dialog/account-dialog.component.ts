@@ -48,7 +48,7 @@ export class AccountDialogComponent implements OnInit {
       age: [this.account.age || '', [Validators.required, Validators.pattern(Constant.PATTERN.NUMBER)]],
       balance: [this.account.balance || '', [Validators.required, Validators.pattern(Constant.PATTERN.NUMBER)]],
       gender: [this.account.gender || '', Validators.required],
-      account_number: [this.account.account_number || '', [Validators.required, Validators.pattern(Constant.PATTERN.NUMBER), Validators.maxLength(13)]],
+      account_number: [this.account.account_number || '', [Validators.required, Validators.pattern(Constant.PATTERN.NUMBER), Validators.maxLength(13), Validators.minLength(10)]],
     });
   }
 
@@ -122,10 +122,11 @@ export class AccountDialogComponent implements OnInit {
 
   updateAccount() {
     const checkValidate = this.checkSubmitted()
-    console.log(this.getValueToForm());
     if (checkValidate) {
       this.actionService.update(this.getValueToForm()).subscribe(data => {
         // this.closeDialog();
+        console.log(data);
+
         this.showToast(data);
       })
     }

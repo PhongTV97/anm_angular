@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
       name: new FormControl(''),
       email: new FormControl(''),
       address: new FormControl(''),
-      gender: ['1' || '', [Validators.pattern(Constant.PATTERN.NUMBER)]],
+      gender: ['' || '', [Validators.pattern(Constant.PATTERN.NUMBER)]],
       age: ['', [Validators.pattern(Constant.PATTERN.NUMBER)]],
       balance: ['', [Validators.pattern(Constant.PATTERN.NUMBER)]],
       account_number: ['', [Validators.pattern(Constant.PATTERN.NUMBER), Validators.maxLength(13)]],
@@ -133,7 +133,7 @@ export class HomeComponent implements OnInit {
       email: this.searchForm.get('email').value,
       address: this.searchForm.get('address').value,
       age: this.searchForm.get('age').value !== '' ? Number(this.searchForm.get('age').value) : '',
-      gender: Number(this.searchForm.get('gender').value),
+      gender: this.searchForm.get('gender').value !== '' ? Number(this.searchForm.get('gender').value) : '',
       balance: this.searchForm.get('balance').value !== '' ? Number(this.searchForm.get('balance').value) : '',
       account_number: this.searchForm.get('account_number').value,
     };
@@ -148,5 +148,11 @@ export class HomeComponent implements OnInit {
 
   clearForm() {
     this.searchForm.get('name').setValue('');
+    this.searchForm.get('email').setValue('');
+    this.searchForm.get('address').setValue('');
+    this.searchForm.get('age').setValue('');
+    this.searchForm.get('gender').setValue('');
+    this.searchForm.get('balance').setValue('');
+    this.searchForm.get('account_number').setValue('');
   }
 }

@@ -8,25 +8,33 @@
             <th style="min-width: 90px;">Action</th>
           </thead>
           <tbody>
-            <tr *ngFor="let item of rows">
-              <td *ngFor="let ele of columns">
-                {{ ele.field !== 'gender' ? (ele.field === 'balance' ? formatBalance(item[ele.field]) : item[ele.field]) : (item[ele.field] === 0 ? 'Female' : 'Male')}}
-              </td>
-              <td>
-                <div class="row" style="flex-wrap: unset;">
-                  <button title="View Detail" class="btn btn-primary btn-xs icon" data-title="View" data-toggle="modal"
-                    (click)="openDialogAddOrUpdate(item, 'view')" data-target="#view"><i class="fa fa-eye"></i></button>
-                  <button title="Edit" class="btn btn-info btn-xs icon" data-title="Edit" data-toggle="modal"
-                    [attr.disabled]="user.role === 0 ? '' : null" (click)="openDialogAddOrUpdate(item, 'edit')"
-                    data-target="#edit"><i class="fa fa-pencil-square-o"></i>
-                  </button>
-                  <button title="Delete" class="btn btn-danger btn-xs icon" data-title="Delete" data-toggle="modal"
-                    [attr.disabled]="user.role === 0 ? '' : null" (click)="showDialogConfirm(item._id)"
-                    data-target="#delete"><i class="fa fa-times-circle"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
+            <ng-template [ngIf]="rows.length > 0">
+              <tr *ngFor="let item of rows">
+                <td *ngFor="let ele of columns">
+                  {{ ele.field !== 'gender' ? (ele.field === 'balance' ? formatBalance(item[ele.field]) : item[ele.field]) : (item[ele.field] === 0 ? 'Female' : 'Male')}}
+                </td>
+                <td>
+                  <div class="row d-flex justify-content-center" style="flex-wrap: unset;">
+                    <button title="View Detail" class="btn btn-primary btn-xs icon" data-title="View"
+                      data-toggle="modal" (click)="openDialogAddOrUpdate(item, 'view')" data-target="#view"><i
+                        class="fa fa-eye"></i></button>
+                    <button title="Edit" class="btn btn-info btn-xs icon" data-title="Edit" data-toggle="modal"
+                      *ngIf="user.role === 1" (click)="openDialogAddOrUpdate(item, 'edit')" data-target="#edit"><i
+                        class="fa fa-pencil-square-o"></i>
+                    </button>
+                    <button title="Delete" class="btn btn-danger btn-xs icon" data-title="Delete" data-toggle="modal"
+                      *ngIf="user.role === 1" (click)="showDialogConfirm(item._id)" data-target="#delete"><i
+                        class="fa fa-times-circle"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template [ngIf]="rows.length ===  0">
+              <tr>
+                <td colspan="8">Not result found!</td>
+              </tr>
+            </ng-template>
           </tbody>
         </table>
         <div class="clearfix"></div>

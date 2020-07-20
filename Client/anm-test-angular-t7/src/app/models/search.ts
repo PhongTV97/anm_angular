@@ -8,6 +8,6 @@ export class Search {
     account_number: string;
     phone_number: string;
     constructor() {
-        this.gender = '1';
+        this.gender = '';
     }
 }

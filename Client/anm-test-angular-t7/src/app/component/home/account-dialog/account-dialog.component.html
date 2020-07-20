@@ -8,13 +8,13 @@
     <form [formGroup]="accountForm">
         <div class="row">
             <div class="form-group col-6">
-                <label for="formGroupExampleInput">Name</label>
+                <label for="formGroupExampleInput">Name<span class="require"> (*)</span></label>
                 <input type="text" class="form-control" placeholder="Name" formControlName="name"
                     [attr.disabled]="!isView ? null : ''" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                 <div class="invalid-error" *ngIf="submitted && f.name.errors">Name is required</div>
             </div>
             <div class="form-group col-6">
-                <label for="formGroupExampleInput2">Email</label>
+                <label for="formGroupExampleInput2">Email<span class="require"> (*)</span></label>
                 <input type="text" class="form-control" placeholder="Email" [attr.disabled]="!isView ? null : ''"
                     formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
                 <div class="invalid-error" *ngIf="submitted && f.email.errors">
@@ -26,7 +26,7 @@
         </div>
         <div class="row">
             <div class="form-group col-6">
-                <label for="formGroupExampleInput2">Address</label>
+                <label for="formGroupExampleInput2">Address<span class="require"> (*)</span></label>
                 <input type="text" class="form-control" placeholder="Address" [attr.disabled]="!isView ? null : ''"
                     formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
                 <div class="invalid-error" *ngIf="submitted && f.address.errors">Address is required</div>
@@ -44,14 +44,14 @@
         </div>
         <div class="row">
             <div class="form-group col-6">
-                <label for="formGroupExampleInput2">Gender</label>
+                <label for="formGroupExampleInput2">Gender <span class="require"> (*)</span></label>
                 <select class="custom-select" [attr.disabled]="!isView ? null : ''" formControlName="gender">
                     <option value="1">Male</option>
                     <option value="0">Female</option>
                 </select>
             </div>
             <div class="form-group col-6">
-                <label for="formGroupExampleInput2">Balance</label>
+                <label for="formGroupExampleInput2">Balance<span class="require"> (*)</span></label>
                 <input type="text" class="form-control" placeholder="Balance" [attr.disabled]="!isView ? null : ''"
                     formControlName="balance" [ngClass]="{ 'is-invalid': submitted && f.balance.errors }">
                 <div class="invalid-error" *ngIf="submitted && f.balance.errors">
@@ -64,7 +64,7 @@
         </div>
         <div class="row">
             <div class="form-group col-6">
-                <label for="formGroupExampleInput2">Account Number</label>
+                <label for="formGroupExampleInput2">Account Number<span class="require"> (*)</span></label>
                 <input type="text" class="form-control" placeholder="Account Number"
                     [attr.disabled]="!isView ? null : ''" formControlName="account_number"
                     [ngClass]="{ 'is-invalid': submitted && f.account_number.errors }">
@@ -78,6 +78,9 @@
                     </div>
                     <div class="invalid-error" *ngIf="submitted && f.account_number.errors.maxlength">Max length of
                         account number is 13
+                    </div>
+                    <div class="invalid-error" *ngIf="submitted && f.account_number.errors.minlength">Min length of
+                        account number is 10
                     </div>
                 </div>
             </div>

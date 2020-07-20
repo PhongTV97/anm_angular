@@ -10,11 +10,10 @@ export const getAccounts = async (query, limit, skip) => {
     const name = new RegExp(query.name, 'i')
     const email = new RegExp(query.email, 'i')
     const address = new RegExp(query.address, 'i')
-    //age
+    const age = query.age || null
     const gender = query.gender || null
-    //balance
+    const balance = query.balance || null
     const account_number = new RegExp(query.account_number, 'i')
-
     const col = query.col || null
     const sort = query.sort || null
     let sortCondition = {}
@@ -36,6 +35,12 @@ export const getAccounts = async (query, limit, skip) => {
     }
     if (gender) {
         queryDb.$and.push({ gender })
+    }
+    if (age) {
+        queryDb.$and.push({ age })
+    }
+    if (balance) {
+        queryDb.$and.push({ balance })
     }
     if (col && sort) {
         sortCondition[col] = sort === 'desc' ? -1 : 1

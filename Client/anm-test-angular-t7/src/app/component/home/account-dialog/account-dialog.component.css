@@ -17,6 +17,6 @@
     margin-bottom: 20px;
 }
 
-.invalid-error{
+.invalid-error, .require{
     color: red;
 }

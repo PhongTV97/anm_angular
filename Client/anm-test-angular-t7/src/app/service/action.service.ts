@@ -28,10 +28,12 @@ export class ActionService {
   }
 
   update(data): Observable<any> {
+    console.log('update data');
     return this.http.put<any>(apiUrl + '/accounts/' + data._id, data, httpOptions)
   }
 
   add(data): Observable<any> {
+    console.log('add data');
     return this.http.post<any>(apiUrl + '/accounts/', data, httpOptions)
   }
 }

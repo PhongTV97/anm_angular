@@ -90,6 +90,9 @@ export class HomeComponent implements OnInit {
 
   openFormDialog(): void {
     const dialogRef = this.dialog.open(AccountDialogComponent, { data: { action: 'add' } });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   this.getAccountFromServer();
+    // });
   }
 
   changePageNumber(page) {
@@ -153,5 +156,12 @@ export class HomeComponent implements OnInit {
     this.searchForm.get('gender').setValue('');
     this.searchForm.get('balance').setValue('');
     this.searchForm.get('account_number').setValue('');
+  }
+
+  reloadData(data) {
+    console.log(data);
+    if (data === 'delete_ok' || data === 'update_ok') {
+      this.getAccountFromServer();
+    }
   }
 }

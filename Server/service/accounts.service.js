@@ -63,8 +63,8 @@ export const addAccount = async (account) => {
     return true
 }
 
-export const editAccount = async (account) => {
-    const acc = await Accounts.updateOne(account);
+export const editAccount = async (id, account) => {
+    const acc = await Accounts.updateOne({ _id: id }, account, { upsert: true });
     if (!acc) {
         return false
     }

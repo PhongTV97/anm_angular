@@ -35,6 +35,8 @@ export class AccountDialogComponent implements OnInit {
         this.isView = true
       }
       this.account = this.data.item;
+      console.log(this.account);
+
       this.account = { ...this.account, gender: this.account.gender.toString() }
     }
     this.initUserForm();
@@ -116,15 +118,17 @@ export class AccountDialogComponent implements OnInit {
     };
   }
 
-  closeDialog() {
-    this.dialogRef.close();
+  closeDialog(status) {
+    this.dialogRef.close(status);
   }
 
   updateAccount() {
     const checkValidate = this.checkSubmitted()
     if (checkValidate) {
       this.actionService.update(this.getValueToForm()).subscribe(data => {
-        // this.closeDialog();
+        if (data.result) {
+          this.closeDialog('update_ok');
+        }
         this.showToast(data);
       })
     }

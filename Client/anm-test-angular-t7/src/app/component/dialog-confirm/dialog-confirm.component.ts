@@ -34,13 +34,15 @@ export class DialogConfirmComponent implements OnInit {
     });
   }
 
-  closeDialogConfirm() {
-    this.dialogRef.close();
+  closeDialogConfirm(status) {
+    this.dialogRef.close(status);
   }
 
   removeItem() {
     this.actionService.remove(this.data.id).subscribe(res => {
-      this.closeDialogConfirm();
+      if (res.result) {
+        this.closeDialogConfirm('delete_ok');
+      }
       this.showToast(res);
     })
   }

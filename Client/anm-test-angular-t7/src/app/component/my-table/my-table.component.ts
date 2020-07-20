@@ -16,6 +16,7 @@ export class MyTableComponent implements OnInit {
   @Input() page: number;
   @Input() pageSize: number;
   @Output() changePage = new EventEmitter();
+  @Output() actionSucc = new EventEmitter();
 
   constructor(public dialog: MatDialog, private ultilsService: UtilsService) { }
 
@@ -24,10 +25,22 @@ export class MyTableComponent implements OnInit {
 
   openDialogAddOrUpdate(item, action) {
     const dialogRef = this.dialog.open(AccountDialogComponent, { data: { item, action } });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'update_ok') {
+        this.actionSucc.emit('update_ok')
+      }
+    });
   }
 
   showDialogConfirm(id) {
     const dialogRef = this.dialog.open(DialogConfirmComponent, { data: { id } });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'delete_ok') {
+        this.actionSucc.emit('delete_ok')
+      }
+    });
   }
 
   formatBalance(balance) {

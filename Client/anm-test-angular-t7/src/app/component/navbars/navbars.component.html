@@ -9,7 +9,7 @@
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
     </ul>
     <div style="display: flex;justify-content: center; align-items: center;">
-      <b class="mr-3">{{curUser.user.role === 1 ? 'Admin' : 'User'}}</b>
+      <span style="font-weight: 500;" class="mr-3">{{curUser.user.role === 1 ? 'Admin' : 'User'}}</span>
       <div class="avatar">
         <img
           [src]="curUser.user.role === 1 ? './../../../assets/avatar_admin.jpg' : './../../../assets/avatar_user.png'" />

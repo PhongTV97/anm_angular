@@ -140,7 +140,6 @@ export class HomeComponent implements OnInit {
     if (check) {
       Object.keys(obj).forEach((key) => (obj[key] === '') && delete obj[key]);
       this.query = obj;
-      console.log(this.query);
       this.getAccountFromServer();
     }
   }

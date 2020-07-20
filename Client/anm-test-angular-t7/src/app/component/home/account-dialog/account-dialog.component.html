@@ -32,7 +32,7 @@
                 <div class="invalid-error" *ngIf="submitted && f.address.errors">Address is required</div>
             </div>
             <div class="form-group col-6">
-                <label for="formGroupExampleInput2">Age</label>
+                <label for="formGroupExampleInput2">Age<span class="require"> (*)</span></label>
                 <input type="text" class="form-control" placeholder="Age" [attr.disabled]="!isView ? null : ''"
                     formControlName="age" [ngClass]="{ 'is-invalid': submitted && f.age.errors }">
                 <div class="invalid-error" *ngIf="submitted && f.age.errors">

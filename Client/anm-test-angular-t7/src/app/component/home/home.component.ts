@@ -6,6 +6,7 @@ import { AccountDialogComponent } from './account-dialog/account-dialog.componen
 import { Search } from 'src/app/models/Search';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Constant } from 'src/app/common/constant';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
   submitted = false;
   query: any = {};
 
-  constructor(private apiService: ActionService, public dialog: MatDialog, private formBuilder: FormBuilder) {
+  constructor(private apiService: ActionService, public dialog: MatDialog, private formBuilder: FormBuilder, private spinner: NgxSpinnerService) {
     this.accCurrent = new Account();
     this.objSearch = new Search();
     this.fields = [
@@ -67,10 +68,14 @@ export class HomeComponent implements OnInit {
   }
 
   getAccountFromServer() {
+    this.spinner.show();
     this.apiService.getData(this.query).subscribe(res => {
-      this.lstAccounts = res.lstAccounts;
-      this.page = res.page;
-      this.totals = res.total;
+      if (res.result) {
+        this.lstAccounts = res.lstAccounts;
+        this.page = res.page;
+        this.totals = res.total;
+      }
+      this.spinner.hide();
     })
   }
 

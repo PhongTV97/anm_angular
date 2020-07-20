@@ -194,7 +194,6 @@ export const editController = async (req, res) => {
             account_number,
         }
         const result = await editAccount(id, account)
-        console.log('result', result);
         if (!result) {
             return res.json({ result: false, message: message.MSG002 });
         }

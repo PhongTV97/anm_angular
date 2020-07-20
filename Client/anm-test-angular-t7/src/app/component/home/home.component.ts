@@ -90,9 +90,6 @@ export class HomeComponent implements OnInit {
 
   openFormDialog(): void {
     const dialogRef = this.dialog.open(AccountDialogComponent, { data: { action: 'add' } });
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.getAccountFromServer();
-    // });
   }
 
   changePageNumber(page) {

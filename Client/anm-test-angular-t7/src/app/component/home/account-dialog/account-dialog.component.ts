@@ -152,7 +152,9 @@ export class AccountDialogComponent implements OnInit {
     const checkValidate = this.checkSubmitted()
     if (checkValidate) {
       this.actionService.add(this.getValueToForm()).subscribe(data => {
-        // this.closeDialog();
+        if (data.result) {
+          this.closeDialog('add');
+        }
         this.showToast(data);
       })
     }

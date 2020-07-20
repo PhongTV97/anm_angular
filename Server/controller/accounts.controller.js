@@ -6,6 +6,10 @@ import { isNumber, validateRegex, getPaginationItems } from './../helpers/utils'
 export const searchController = async (req, res) => {
     try {
         const { query } = req
+        query.name = query.name ? query.name.trim() : ''
+        query.email = query.email ? query.email.trim() : ''
+        query.address = query.address ? query.address.trim() : ''
+        query.account_number = query.account_number ? query.account_number.trim() : ''
         const pagination = getPaginationItems(query.page, query.limit)
         delete req.query.page;
         delete req.query.limit;

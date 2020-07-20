@@ -1,11 +1,5 @@
 import Accounts from './../models/accounts';
 
-// export const getAccounts = async (query, limit, page) => {
-//     const skip = (page - 1) * limit;
-//     let account = await Accounts.find().limit(limit).skip(skip);
-//     return account
-// }
-
 export const getAccounts = async (query, limit, skip) => {
     const name = new RegExp(query.name, 'i')
     const email = new RegExp(query.email, 'i')
